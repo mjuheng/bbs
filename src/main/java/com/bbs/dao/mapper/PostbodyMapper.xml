@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.IPostbodyDao">
+
+    <resultMap id="postbodyAndPostAndConsumer" type="Postbody">
+        <id property="id" column="id" />
+        <result property="content" column="content" />
+        <result property="replyTime" column="replyTime" />
+        <result property="rank" column="rank" />
+        <result property="cite" column="cite" />
+        <result property="adopt" column="adopt" />
+        <association property="post" javaType="Post">
+            <id property="id" column="post_id" />
+            <result property="title" column="title" />
+            <result property="firstTime" column="firstTime" />
+            <result property="replyNum" column="replyNum" />
+            <result property="watchNum" column="watchNum" />
+        </association>
+        <association property="consumer" javaType="Consumer">
+            <id property="id" column="consumer_id" />
+            <result property="username" column="username" />
+            <result property="headImage" column="headImage" />
+        </association>
+    </resultMap>
+
+
+    <!--插入全部信息-->
+    <insert id="insertPostbody" parameterType="Postbody">
+        INSERT INTO postbody(content,replyTime,rank,cite,post_id,consumer_id)
+        VALUE (#{content},#{replyTime},#{rank},#{cite},#{post_id},#{consumer_id})
+    </insert>
+
+
+    <!--根据id查找帖子细节-->
+    <select id="findPostbodyById" parameterType="Integer" resultMap="postbodyAndPostAndConsumer">
+        SELECT postbody.*,post.*,consumer.username,consumer.headImage,consumer.id FROM postbody,post,consumer
+        WHERE postbody.post_id = post.id
+        AND postbody.consumer_id = consumer.id
+        AND post_id = #{id}
+        ORDER BY postbody.id ASC
+    </select>
+</mapper>

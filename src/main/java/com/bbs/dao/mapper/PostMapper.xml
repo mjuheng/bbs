@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.IPostDao">
+
+    <resultMap id="postAndConsumerNameAndCategoryName" type="Post">
+        <id property="id" column="id" />
+        <result property="title" column="title" />
+        <result property="lastTime" column="lastTime" />
+        <result property="resolve" column="resolve" />
+        <result property="replyNum" column="replyNum" />
+        <association property="consumer" javaType="Consumer">
+            <result property="username" column="username" />
+            <result property="headImage" column="headImage" />
+        </association>
+        <association property="category" javaType="Category">
+            <result property="name" column="name" />
+        </association>
+    </resultMap>
+
+    <sql id="findPost">
+        SELECT post.*,consumer.username,consumer.headImage,category.name FROM post,consumer,category
+        WHERE post.consumer_id = consumer.id
+        AND post.category_id = category.id
+    </sql>
+
+    <!--插入全部信息-->
+    <insert id="insertPost" parameterType="Post" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO post(title,firstTime,lastTime,resolve,peak,replyNum,category_id,consumer_id)
+        VALUE(#{title},#{firstTime},#{lastTime},#{resolve},#{peak},#{replyNum},#{category_id},#{consumer_id})
+    </insert>
+
+    <!--查找全部的帖子-->
+    <select id="findAll" resultMap="postAndConsumerNameAndCategoryName">
+        <include refid="findPost" />
+        ORDER BY post.id DESC
+    </select>
+
+    <!--访问时，观看人数加一-->
+    <update id="updateWatchNum" parameterType="Integer">
+        UPDATE post
+        SET watchNum = watchNum + 1
+        WHERE id = #{id}
+    </update>
+
+    <!--根据分类查找帖子-->
+    <select id="findByCategory" parameterType="Integer" resultMap="postAndConsumerNameAndCategoryName">
+        <include refid="findPost" />
+        AND post.category_id = #{category_id}
+    </select>
+
+    <!--查找置顶帖子-->
+    <select id="findPostPeak" resultMap="postAndConsumerNameAndCategoryName">
+        <include refid="findPost" />
+        AND post.peak = 1
+    </select>
+
+    <!--回复数+1-->
+    <update id="updateReplyNum" parameterType="Integer">
+        UPDATE post
+        SET replyNum = replyNum + 1
+        WHERE id = #{id}
+    </update>
+
+    <!--根据帖子标题，进行模糊查找-->
+    <select id="findPostByTitle" parameterType="String" resultMap="postAndConsumerNameAndCategoryName">
+        <include refid="findPost" />
+        AND post.title LIKE '%${_parameter}%'
+    </select>
+</mapper>

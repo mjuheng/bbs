@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.ICategoryDao">
+    <!--查找全部-->
+    <select id="findAll" resultType="Category">
+        SELECT * FROM category
+    </select>
+    <!--根据名字，查找ID-->
+    <select id="findIdByName" parameterType="String" resultType="Integer">
+        SELECT id FROM category
+        WHERE name=#{name}
+    </select>
+</mapper>
