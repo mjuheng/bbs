@@ -19,6 +19,11 @@
         alert("${writingResult}")
     </script>
 </c:if>
+<c:if test="${adoptResult != null}">
+    <script>
+        alert("${adoptResult.info}")
+    </script>
+</c:if>
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8 content detail">
@@ -98,7 +103,7 @@
 
                                 <div class="jieda-admin">
                                     <c:if test="${sessionScope.consumer.id == requestScope.postbodys[0].consumer.id}">
-                                        <span class="jieda-accept" type="accept">采纳</span>
+                                        <span class="jieda-accept" type="accept"><a href="${pageContext.request.contextPath}/postbody/makeAdopt.do?post_id=${requestScope.postbodys[0].post.id}&postbody_id=${postbody.id}"> 采纳</a></span>
                                     </c:if>
                                     <c:if test="${sessionScope.consumer.id == postbody.consumer.id || sessionScope.consumer.id == requestScope.postbodys[0].consumer.id}">
                                         <span type="del">删除</span>

@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div>
-                <img src="${pageContext.request.contextPath}/consumer/getCapture.do"/>
+                <img src="${pageContext.request.contextPath}/consumer/getCapture.do" onclick="this.src=this.src+'?c='+Math.random();" />
                 <input type="password" id="verify" placeholder="verify" name="verify" style="height: 35px; width: 330px">
             </div>
             <div class="form-group">

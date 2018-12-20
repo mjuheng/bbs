@@ -50,6 +50,19 @@ public class PostbodyService implements IPostbodyService {
 
     @Override
     public ReturnInfo makeAdopt(int post_id, int postbody_id) {
-        return null;
+        ReturnInfo returnInfo = new ReturnInfo();
+        //判断帖子是否已经被采纳（每个帖子只能采纳一条评论）
+        boolean isResolve = postDao.checkResolve(post_id);
+        if (!isResolve){
+            //将评论设置为采纳
+            postbodyDao.setAdopt(postbody_id);
+            //将帖子设置为已解决
+            postDao.setResolve(post_id);
+            returnInfo.setInfo("采纳成功");
+        }else {
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("该帖子已结贴，无法采纳");
+        }
+        return returnInfo;
     }
 }

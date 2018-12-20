@@ -41,4 +41,12 @@
         AND post_id = #{id}
         ORDER BY postbody.id ASC
     </select>
+
+    <!--将评论设置为采纳状态-->
+    <update id="setAdopt" parameterType="Integer">
+        UPDATE postbody
+        SET postbody.adopt = TRUE
+        WHERE postbody.id = #{id}
+    </update>
+
 </mapper>

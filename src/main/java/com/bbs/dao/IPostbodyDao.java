@@ -19,4 +19,10 @@ public interface IPostbodyDao {
      */
     List<Postbody> findPostbodyById(int id);
 
+    /**
+     * 将评论设置为采纳
+     * @param postbody_id
+     * @return
+     */
+    int setAdopt(int postbody_id);
 }

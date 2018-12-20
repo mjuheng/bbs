@@ -2,12 +2,15 @@ package com.bbs.comtroller;
 
 import com.bbs.entity.Consumer;
 import com.bbs.entity.Postbody;
+import com.bbs.service.IPostService;
 import com.bbs.service.IPostbodyService;
+import com.bbs.service.impl.PostService;
 import com.bbs.util.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -63,7 +66,8 @@ public class PostbodyController {
      */
     @RequestMapping("/makeAdopt.do")
     public String makeAdopt(Integer post_id, Integer postbody_id, HttpServletRequest request){
-
-        return "";
+        ReturnInfo returnInfo = postbodyService.makeAdopt(post_id, postbody_id);
+        request.setAttribute("adoptResult",returnInfo);
+        return "forward:/postbody/findPostbody/" + post_id + ".do";
     }
 }

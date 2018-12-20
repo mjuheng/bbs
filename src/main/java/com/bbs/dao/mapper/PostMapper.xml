@@ -68,4 +68,17 @@
         <include refid="findPost" />
         AND post.title LIKE '%${_parameter}%'
     </select>
+
+    <!--根据ID,查看帖子的解决状态-->
+    <select id="checkResolve" parameterType="Integer" resultType="Boolean">
+        SELECT post.resolve FROM post
+        WHERE post.id = #{id}
+    </select>
+
+    <!--将帖子设置为已解决状态-->
+    <update id="setResolve" parameterType="Integer">
+        UPDATE post
+        SET post.resolve = TRUE
+        WHERE post.id = #{id}
+    </update>
 </mapper>
