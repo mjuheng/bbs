@@ -45,7 +45,6 @@ public class PostbodyService implements IPostbodyService {
     public List<Postbody> findPostbody(Integer id) {
         //帖子访问+1
         postDao.updateWatchNum(id);
-
         return postbodyDao.findPostbodyById(id);
     }
 
