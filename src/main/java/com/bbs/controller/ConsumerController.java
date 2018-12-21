@@ -1,4 +1,4 @@
-package com.bbs.comtroller;
+package com.bbs.controller;
 
 import com.bbs.entity.Consumer;
 import com.bbs.service.IConsumerService;
@@ -171,8 +171,8 @@ public class ConsumerController {
         consumer.setId(consumer_id);
         //对数据库信息修改
         ReturnInfo returnInfo = consumerService.updateInfo(consumer);
-        request.setAttribute("result",returnInfo);
-        return "forward:/post/findPostByConsumerId.do?consumer_id=" + consumer_id;
+        request.setAttribute("result",returnInfo.getInfo());
+        return "/consumerDetail";
     }
 
     /**
@@ -188,7 +188,7 @@ public class ConsumerController {
         consumer.setPassword(password);
         ReturnInfo returnInfo = consumerService.updatePassword(consumer, confirm_password);
         request.setAttribute("result",returnInfo.getInfo());
-        return "/setConsumer";
+        return "/consumerDetail";
     }
 
     @RequestMapping("/exit.do")

@@ -24,7 +24,7 @@
 <div class="layui-container fly-marginTop fly-user-main">
     <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
         <li class="layui-nav-item">
-            <a href="home.html">
+            <a href="${pageContext.request.contextPath}/opt/consumerDetail.do">
                 <i class="layui-icon">&#xe609;</i>
                 我的主页
             </a>
@@ -35,8 +35,8 @@
                 用户中心
             </a>
         </li>
-        <li class="layui-nav-item layui-this">
-            <a href="/opt/setConsumer.do">
+        <li class="layui-nav-item">
+            <a href="${pageContext.request.contextPath}/opt/setConsumer.do">
                 <i class="layui-icon">&#xe620;</i>
                 基本设置
             </a>

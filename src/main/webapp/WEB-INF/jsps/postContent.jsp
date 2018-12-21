@@ -23,7 +23,7 @@
 
     <input type="text" placeholder="搜索内容" name="title" style="height: 40px;width: 500px;">
     <input type="submit" class="layui-btn" value="搜索">
-    <button class="layui-btn"><a href="${pageContext.request.contextPath}/category/findCategoryAll.do" style="">发帖</a></button>
+    <button class="layui-btn"><a href="${pageContext.request.contextPath}/category/findCategoryAll.do">发帖</a></button>
 </form>
 
 

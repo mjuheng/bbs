@@ -1,12 +1,10 @@
-package com.bbs.comtroller;
+package com.bbs.controller;
 
 import com.bbs.entity.Consumer;
 import com.bbs.entity.Post;
 import com.bbs.entity.custom.WritingPostCustom;
 import com.bbs.service.IPostService;
 import com.bbs.util.ReturnInfo;
-import org.apache.ibatis.jdbc.Null;
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/post")

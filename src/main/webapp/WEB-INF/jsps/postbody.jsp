@@ -27,19 +27,16 @@
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8 content detail">
-            <div class="fly-panel detail-box" style="height: auto">
+            <div class="fly-panel detail-box" style="height: 300px">
                 <h1>${requestScope.postbodys[0].post.title}</h1>
                 <div class="fly-detail-info">
-                    <!-- <span class="layui-badge">审核中</span> -->
-
+                    <span class="layui-badge layui-bg-red"><a href="#">置顶</a></span>
+                    <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
                     <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
 
                     <br />
                     <div class="fly-admin-box" data-id="123">
-
-                        <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
-
-                        <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
+                        <%--<span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span>--%>
                     </div>
                     <span class="fly-list-nums">
             <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i> ${requestScope.postbodys[0].post.replyNum}</a>
@@ -54,7 +51,7 @@
                         <a href="../user/home.html" class="fly-link">
                             <cite>${requestScope.postbodys[0].consumer.username}</cite>
                         </a>
-                        <span>2017-11-30</span>
+                        <span>${requestScope.postbodys[0].formatReplyTime}</span>
                     </div>
                     <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
                         <br />

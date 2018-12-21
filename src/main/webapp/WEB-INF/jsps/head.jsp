@@ -43,7 +43,7 @@
     }
 
     function findConsumerDetial(id) {
-        window.top.document.getElementById("content").src = "/post/findPostByConsumerId.do?consumer_id=" + id;
+        window.top.document.getElementById("content").src = "/opt/consumerDetail.do";
     }
 
     function refresh(){

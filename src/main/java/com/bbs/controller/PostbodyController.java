@@ -1,16 +1,13 @@
-package com.bbs.comtroller;
+package com.bbs.controller;
 
 import com.bbs.entity.Consumer;
 import com.bbs.entity.Postbody;
-import com.bbs.service.IPostService;
 import com.bbs.service.IPostbodyService;
-import com.bbs.service.impl.PostService;
 import com.bbs.util.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,6 +30,9 @@ public class PostbodyController {
     @RequestMapping("/findPostbody/{id}.do")
     public String findPostbody(@PathVariable Integer id, HttpServletRequest request){
         List<Postbody> postbodys = postbodyService.findPostbody(id);
+        request.setAttribute("postbodys",postbodys);
+        request.setAttribute("postbodys",postbodys);
+        request.setAttribute("postbodys",postbodys);
         request.setAttribute("postbodys",postbodys);
         return "/postbody";
     }

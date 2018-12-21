@@ -101,4 +101,7 @@
         SELECT COUNT(*) FROM post
         WHERE post.consumer_id = #{id}
     </select>
+
+    <!--查找置顶帖子数-->
+
 </mapper>
