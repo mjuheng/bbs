@@ -32,4 +32,19 @@ public interface IConsumerService {
      * @return
      */
     ReturnInfo login(Consumer consumer);
+
+    /**
+     * 更新用户信息
+     * @param consumer
+     * @return
+     */
+    ReturnInfo updateInfo(Consumer consumer);
+
+    /**
+     * 修改用户密码
+     * @param consumer
+     * @param oldPassword
+     * @return
+     */
+    ReturnInfo updatePassword(Consumer consumer, String confirm_password);
 }

@@ -21,4 +21,23 @@
         WHERE username=#{username}
         AND password=#{password}
     </select>
+
+    <!--修改用户信息-->
+    <update id="updateInfo" parameterType="Consumer">
+        UPDATE consumer
+        <set>
+            <if test="city != null and city.length() > 0">city = #{city},</if>
+            <if test="gender != null and city.length() > 0">gender = #{gender},</if>
+            <if test="career != null and career.length() > 0">career = #{career},</if>
+            <if test="note != null and city.length() > 0">note = #{note},</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--修改密码-->
+    <update id="updatePassword" parameterType="Consumer">
+        UPDATE consumer
+        SET password= #{password}
+        WHERE id = #{id}
+    </update>
 </mapper>

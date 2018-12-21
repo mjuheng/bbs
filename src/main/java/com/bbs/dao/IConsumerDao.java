@@ -22,4 +22,18 @@ public interface IConsumerDao {
      * @return
      */
     Consumer findByUsernameAndPassword(Consumer consumer);
+
+    /**
+     * 更新用户的信息
+     * @param consumer
+     * @return
+     */
+    int updateInfo(Consumer consumer);
+
+    /**
+     * 修改用户密码
+     * @param consumer
+     * @return
+     */
+    int updatePassword(Consumer consumer);
 }

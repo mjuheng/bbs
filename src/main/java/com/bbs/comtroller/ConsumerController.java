@@ -128,6 +128,13 @@ public class ConsumerController {
         }
     }
 
+    /**
+     * 登录验证
+     * @param consumer
+     * @param verify
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/login.do",method = RequestMethod.POST)
     public String login(Consumer consumer, String verify, HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -150,4 +157,44 @@ public class ConsumerController {
             return "forward:/opt/login.do";
         }
     }
+
+    /**
+     * 更新信息
+     * @param consumer
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateInfo.do")
+    public String updateInfo(Consumer consumer, HttpServletRequest request){
+        Consumer updateConsumer = (Consumer) request.getSession().getAttribute("consumer");
+        int consumer_id = updateConsumer.getId();
+        consumer.setId(consumer_id);
+        //对数据库信息修改
+        ReturnInfo returnInfo = consumerService.updateInfo(consumer);
+        request.setAttribute("result",returnInfo);
+        return "forward:/post/findPostByConsumerId.do?consumer_id=" + consumer_id;
+    }
+
+    /**
+     * 修改密码
+     * @param password
+     * @param confirm_password
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updatePassword.do")
+    public String updatePassword(String password, String confirm_password, HttpServletRequest request){
+        Consumer consumer = (Consumer) request.getSession().getAttribute("consumer");
+        consumer.setPassword(password);
+        ReturnInfo returnInfo = consumerService.updatePassword(consumer, confirm_password);
+        request.setAttribute("result",returnInfo.getInfo());
+        return "/setConsumer";
+    }
+
+    @RequestMapping("/exit.do")
+    public String exit(HttpSession session){
+        session.removeAttribute("consumer");
+        return "/head";
+    }
+
 }

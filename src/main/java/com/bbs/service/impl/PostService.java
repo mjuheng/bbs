@@ -42,6 +42,16 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public List<Post> findByConsumerId(int consumer_id) {
+        return postDao.findByConsumerId(consumer_id);
+    }
+
+    @Override
+    public int findCountByConsumerId(int consumer_id) {
+        return postDao.findCountByConsumerId(consumer_id);
+    }
+
+    @Override
     public List<Post> findPostByTitle(String title) {
         return postDao.findPostByTitle(title);
     }

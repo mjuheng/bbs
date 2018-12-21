@@ -10,6 +10,7 @@
         <result property="lastTime" column="lastTime" />
         <result property="resolve" column="resolve" />
         <result property="replyNum" column="replyNum" />
+        <result property="watchNum" column="watchNum" />
         <association property="consumer" javaType="Consumer">
             <result property="username" column="username" />
             <result property="headImage" column="headImage" />
@@ -88,4 +89,16 @@
         SET replyNum = replyNum - 1
         WHERE id = #{id}
     </update>
+
+    <!--根据用户id，查找所发帖子-->
+    <select id="findByConsumerId" parameterType="Integer" resultMap="postAndConsumerNameAndCategoryName">
+        <include refid="findPost" />
+        AND post.consumer_id = #{id}
+    </select>
+
+    <!--根据用户id，查看其发帖数-->
+    <select id="findCountByConsumerId" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(*) FROM post
+        WHERE post.consumer_id = #{id}
+    </select>
 </mapper>

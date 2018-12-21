@@ -42,4 +42,18 @@ public interface IPostService {
      * @return
      */
     List<Post> findPostByTitle(String title);
+
+    /**
+     * 根据id，查找用户所发帖子
+     * @param consumer_id
+     * @return
+     */
+    List<Post> findByConsumerId(int consumer_id);
+
+    /**
+     * 查找用户发帖数
+     * @param consumer_id
+     * @return
+     */
+    int findCountByConsumerId(int consumer_id);
 }

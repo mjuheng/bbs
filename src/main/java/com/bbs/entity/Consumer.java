@@ -9,6 +9,10 @@ public class Consumer implements Serializable {
     private String password;        //密码
     private String headImage;       //头像图片地址
     private String email;           //账号邮箱
+    private String city;            //城市
+    private String gender;          //性别
+    private String note;            //个人签名
+    private String career;          //职业
 
     public String getPassword() {
         return password;
@@ -50,13 +54,35 @@ public class Consumer implements Serializable {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Consumer{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", headImage='" + headImage + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getCareer() {
+        return career;
+    }
+
+    public void setCareer(String career) {
+        this.career = career;
     }
 }

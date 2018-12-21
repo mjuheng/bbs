@@ -14,6 +14,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/layui/layui.all.js"></script>
 </head>
 <body>
+
 <ul class="layui-nav">
     <li class="layui-nav-item">&nbsp;</li>
     <img src="${pageContext.request.contextPath}/layui/images/logo.png" style="position: absolute;left: 0px;" onclick="refresh()">
@@ -29,10 +30,21 @@
         <div style="float: right">
             <li class="layui-nav-item"><img src="${sessionScope.consumer.headImage}" width="50px" height="50px" alt="头像"/></li>
             <li class="layui-nav-item" onclick="findConsumerDetial(${sessionScope.consumer.id})">您好，${sessionScope.consumer.username}</li>
+            <li class="layui-nav-item">&nbsp;&nbsp;&nbsp;</li>
+            <li class="layui-nav-item" onclick="toExit()">退出</li>
         </div>
     </c:if>
 </ul>
 <script>
+
+    function toExit() {
+        window.location.href = "/consumer/exit.do";
+        top.location.href = "/index.jsp";
+    }
+
+    function findConsumerDetial(id) {
+        window.top.document.getElementById("content").src = "/post/findPostByConsumerId.do?consumer_id=" + id;
+    }
 
     function refresh(){
         top.location.href = "/index.jsp"

@@ -90,4 +90,15 @@ public class PostController {
         return "/searchResult";
     }
 
+    @RequestMapping("/findPostByConsumerId.do")
+    public String findByConsumerId(int consumer_id,HttpServletRequest request){
+        //用户所发帖子
+        List<Post> posts = postService.findByConsumerId(consumer_id);
+        //用户发帖数
+        int sendCount = postService.findCountByConsumerId(consumer_id);
+        request.setAttribute("sendCount",sendCount);
+        request.setAttribute("posts",posts);
+        return "/activate";
+    }
+
 }

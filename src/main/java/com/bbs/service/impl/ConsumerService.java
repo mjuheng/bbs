@@ -49,8 +49,32 @@ public class ConsumerService implements IConsumerService {
     }
 
     @Override
+    public ReturnInfo updateInfo(Consumer consumer) {
+        ReturnInfo returnInfo = new ReturnInfo();
+        returnInfo.setInfo("修改成功");
+        int row = consumerDao.updateInfo(consumer);
+        if (row == 0){
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("修改失败");
+        }
+        return returnInfo;
+    }
+
+    @Override
+    public ReturnInfo updatePassword(Consumer consumer, String confirm_password) {
+        ReturnInfo returnInfo = new ReturnInfo();
+        returnInfo.setInfo("修改密码成功");
+        if (confirm_password != null && confirm_password.equals(consumer.getPassword())){
+            consumerDao.updatePassword(consumer);
+        }else {
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("密码不一致，修改失败");
+        }
+        return returnInfo;
+    }
+
+    @Override
     public int checkUsername(String username) {
-        int count = consumerDao.checkUsername(username);
-        return count;
+        return consumerDao.checkUsername(username);
     }
 }

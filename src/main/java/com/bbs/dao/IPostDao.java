@@ -69,4 +69,18 @@ public interface IPostDao {
      * @return
      */
     int deductReplyNum(int id);
+
+    /**
+     * 根据用户id，查找所发帖子
+     * @param id
+     * @return
+     */
+    List<Post> findByConsumerId(int id);
+
+    /**
+     * 根据用户id，查找其发帖数
+     * @param id
+     * @return
+     */
+    int findCountByConsumerId(int id);
 }
