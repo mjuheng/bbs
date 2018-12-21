@@ -51,15 +51,22 @@ public interface IPostDao {
 
     /**
      * 检查帖子是否已解决
-     * @param post_id
+     * @param id
      * @return
      */
-    boolean checkResolve(int post_id);
+    boolean checkResolve(int id);
 
     /**
      * 将帖子设置为已解决状态
-     * @param post_id
+     * @param id
      * @return
      */
-    int setResolve(int post_id);
+    int setResolve(int id);
+
+    /**
+     * 回复数-1
+     * @param id
+     * @return
+     */
+    int deductReplyNum(int id);
 }

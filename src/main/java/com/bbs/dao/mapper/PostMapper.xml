@@ -81,4 +81,11 @@
         SET post.resolve = TRUE
         WHERE post.id = #{id}
     </update>
+    
+    <!--回复数-1-->
+    <update id="deductReplyNum" parameterType="Integer">
+        UPDATE post
+        SET replyNum = replyNum - 1
+        WHERE id = #{id}
+    </update>
 </mapper>

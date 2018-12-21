@@ -48,6 +48,31 @@ public class PostbodyService implements IPostbodyService {
         return postbodyDao.findPostbodyById(id);
     }
 
+    /**
+     * 删除评论
+     * @param postbody_id
+     * @return
+     */
+    @Override
+    public ReturnInfo deleteById(int post_id, int postbody_id) {
+        ReturnInfo returnInfo = new ReturnInfo();
+        returnInfo.setInfo("删除成功");
+        //如果此条评论被采纳，则不能删除
+        if (!postbodyDao.getAdopt(postbody_id)) {
+            int row = postbodyDao.deleteById(postbody_id);
+            if (row == 0) {
+                returnInfo.setCode(-1);
+                returnInfo.setInfo("删除失败");
+            } else {
+                postDao.deductReplyNum(post_id);
+            }
+        }else {
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("评论已被采纳，不能删除");
+        }
+        return returnInfo;
+    }
+
     @Override
     public ReturnInfo makeAdopt(int post_id, int postbody_id) {
         ReturnInfo returnInfo = new ReturnInfo();

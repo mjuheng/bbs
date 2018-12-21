@@ -49,4 +49,16 @@
         WHERE postbody.id = #{id}
     </update>
 
+    <!--根据id查看此评论是否被采纳-->
+    <select id="getAdopt" parameterType="Integer" resultType="Boolean">
+        SELECT postbody.adopt FROM postbody
+        WHERE postbody.id = #{id}
+    </select>
+
+    <!--根据id删除评论-->
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM postbody
+        WHERE postbody.id = #{id}
+    </delete>
+
 </mapper>

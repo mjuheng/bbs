@@ -14,14 +14,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/global.css">
 </head>
 <body>
-<c:if test="${writingResult != null}">
+<c:if test="${requestScope.writingResult != null}">
     <script>
-        alert("${writingResult}")
+        alert("${requestScope.writingResult}")
     </script>
 </c:if>
-<c:if test="${adoptResult != null}">
+<c:if test="${requestScope.result != null}">
     <script>
-        alert("${adoptResult.info}")
+        alert("${requestScope.result.info}")
     </script>
 </c:if>
 <div class="layui-container">
@@ -106,7 +106,7 @@
                                         <span class="jieda-accept" type="accept"><a href="${pageContext.request.contextPath}/postbody/makeAdopt.do?post_id=${requestScope.postbodys[0].post.id}&postbody_id=${postbody.id}"> 采纳</a></span>
                                     </c:if>
                                     <c:if test="${sessionScope.consumer.id == postbody.consumer.id || sessionScope.consumer.id == requestScope.postbodys[0].consumer.id}">
-                                        <span type="del">删除</span>
+                                        <span type="del"><a href="${pageContext.request.contextPath}/postbody/deletePost.do?post_id=${requestScope.postbodys[0].post.id}&postbody_id=${postbody.id}">删除</span>
                                     </c:if>
                                 </div>
                             </div>

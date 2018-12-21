@@ -67,7 +67,19 @@ public class PostbodyController {
     @RequestMapping("/makeAdopt.do")
     public String makeAdopt(Integer post_id, Integer postbody_id, HttpServletRequest request){
         ReturnInfo returnInfo = postbodyService.makeAdopt(post_id, postbody_id);
-        request.setAttribute("adoptResult",returnInfo);
+        request.setAttribute("result",returnInfo);
+        return "forward:/postbody/findPostbody/" + post_id + ".do";
+    }
+
+    /**
+     * 删除评论
+     * @param postbody_id
+     * @return
+     */
+    @RequestMapping("/deletePost.do")
+    public String deletePost(Integer post_id, Integer postbody_id, HttpServletRequest request){
+        ReturnInfo returnInfo = postbodyService.deleteById(post_id, postbody_id);
+        request.setAttribute("result",returnInfo);
         return "forward:/postbody/findPostbody/" + post_id + ".do";
     }
 }

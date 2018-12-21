@@ -21,8 +21,21 @@ public interface IPostbodyDao {
 
     /**
      * 将评论设置为采纳
-     * @param postbody_id
+     * @param id
      * @return
      */
-    int setAdopt(int postbody_id);
+    int setAdopt(int id);
+
+    /**
+     * 根据id，删除评论
+     * @param id
+     * @return
+     */
+    int deleteById(int id);
+
+    /**
+     * 根据id，查看评论是否被采纳
+     * @return
+     */
+    boolean getAdopt(int id);
 }

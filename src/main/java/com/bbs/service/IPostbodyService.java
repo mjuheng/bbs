@@ -20,5 +20,18 @@ public interface IPostbodyService {
      */
     ReturnInfo writingDiscuss(Postbody postbody);
 
+    /**
+     * 采纳评论
+     * @param post_id
+     * @param postbody_id
+     * @return
+     */
     ReturnInfo makeAdopt(int post_id, int postbody_id);
+
+    /**
+     * 删除评论
+     * @param postbody_id
+     * @return
+     */
+    ReturnInfo deleteById(int post_id, int postbody_id);
 }

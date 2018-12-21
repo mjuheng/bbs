@@ -36,5 +36,10 @@ public interface IPostService {
      */
     List<Post> findPostPeak();
 
+    /**
+     * 根据标题模糊查找帖子
+     * @param title
+     * @return
+     */
     List<Post> findPostByTitle(String title);
 }
