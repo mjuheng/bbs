@@ -103,5 +103,28 @@
     </select>
 
     <!--查找置顶帖子数-->
+    <select id="findPeakCount" resultType="Integer">
+        SELECT COUNT(*) FROM post
+        WHERE post.peak = TRUE
+    </select>
 
+    <!--将帖子置顶-->
+    <update id="makePeakById" parameterType="Integer">
+        UPDATE post
+        SET peak = TRUE
+        WHERE id = #{id}
+    </update>
+
+    <!--取消帖子置顶-->
+    <update id="removePeak" parameterType="Integer">
+        UPDATE post
+        SET peak = FALSE
+        WHERE id = #{id}
+    </update>
+
+    <!--根据id，删除帖子-->
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM post
+        WHERE id = #{id}
+    </delete>
 </mapper>

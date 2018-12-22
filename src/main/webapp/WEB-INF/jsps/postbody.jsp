@@ -21,7 +21,7 @@
 </c:if>
 <c:if test="${requestScope.result != null}">
     <script>
-        alert("${requestScope.result.info}")
+        alert("${requestScope.result}")
     </script>
 </c:if>
 <div class="layui-container">
@@ -30,8 +30,13 @@
             <div class="fly-panel detail-box" style="height: 300px">
                 <h1>${requestScope.postbodys[0].post.title}</h1>
                 <div class="fly-detail-info">
-                    <span class="layui-badge layui-bg-red"><a href="#">置顶</a></span>
-                    <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
+                    <c:if test="${requestScope.postbodys[0].post.peak == false}">
+                        <span class="layui-badge layui-bg-red"><a href="${pageContext.request.contextPath}/post/makePeak.do?post_id=${requestScope.postbodys[0].post.id}">置顶</a></span>
+                    </c:if>
+                    <c:if test="${requestScope.postbodys[0].post.peak == true}">
+                        <span class="layui-badge layui-bg-red"><a href="${pageContext.request.contextPath}/post/removePeak.do?post_id=${requestScope.postbodys[0].post.id}">取消置顶</a></span>
+                    </c:if>
+                    <span class="layui-btn layui-btn-xs jie-admin" type="del"><a href="${pageContext.request.contextPath}/post/deletePost.do?post_id=${requestScope.postbodys[0].post.id}">删除</a></span>
                     <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
 
                     <br />

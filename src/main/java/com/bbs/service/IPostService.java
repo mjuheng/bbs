@@ -3,10 +3,8 @@ package com.bbs.service;
 import com.bbs.entity.Post;
 import com.bbs.entity.custom.WritingPostCustom;
 import com.bbs.util.ReturnInfo;
-import javafx.geometry.Pos;
 
 import java.util.List;
-import java.util.Map;
 
 public interface IPostService {
 
@@ -56,4 +54,26 @@ public interface IPostService {
      * @return
      */
     int findCountByConsumerId(int consumer_id);
+
+    /**
+     * 置顶帖子
+     * @param post_id
+     * @return
+     */
+    ReturnInfo makePeak(int post_id);
+
+    /**
+     * 取消置顶帖子
+     * @param post_id
+     * @return
+     */
+    ReturnInfo removePeak(int post_id);
+
+    /**
+     * 删除帖子
+     * @param post_id
+     * @return
+     */
+    ReturnInfo deletePost(int post_id);
+
 }

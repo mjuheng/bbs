@@ -17,6 +17,7 @@
             <result property="firstTime" column="firstTime" />
             <result property="replyNum" column="replyNum" />
             <result property="watchNum" column="watchNum" />
+            <result property="peak" column="peak" />
         </association>
         <association property="consumer" javaType="Consumer">
             <id property="id" column="consumer_id" />
@@ -60,5 +61,6 @@
         DELETE FROM postbody
         WHERE postbody.id = #{id}
     </delete>
+
 
 </mapper>

@@ -79,6 +79,12 @@ public class PostController {
         return "/postContent";
     }
 
+    /**
+     * 根据标题查找帖子
+     * @param title
+     * @param request
+     * @return
+     */
     @RequestMapping("/findPostByTitle.do")
     public String findPostByTitle(String title,HttpServletRequest request){
         List<Post> posts = postService.findPostByTitle(title);
@@ -87,6 +93,12 @@ public class PostController {
         return "/searchResult";
     }
 
+    /**
+     * 根据用户查找帖子
+     * @param consumer_id
+     * @param request
+     * @return
+     */
     @RequestMapping("/findPostByConsumerId.do")
     public String findByConsumerId(int consumer_id,HttpServletRequest request){
         //用户所发帖子
@@ -96,6 +108,39 @@ public class PostController {
         request.setAttribute("sendCount",sendCount);
         request.setAttribute("posts",posts);
         return "/activate";
+    }
+
+    /**
+     * 置顶帖子
+     * @param post_id
+     * @param request
+     * @return
+     */
+    @RequestMapping("/makePeak.do")
+    public String makePeak(int post_id, HttpServletRequest request){
+        ReturnInfo returnInfo = postService.makePeak(post_id);
+        request.setAttribute("result",returnInfo.getInfo());
+        return "forward:/postbody/findPostbody/" + post_id + ".do";
+    }
+
+    /**
+     * 取消帖子置顶
+     * @param post_id
+     * @param request
+     * @return
+     */
+    @RequestMapping("/removePeak.do")
+    public String removePeak(int post_id,HttpServletRequest request){
+        ReturnInfo returnInfo = postService.removePeak(post_id);
+        request.setAttribute("result",returnInfo.getInfo());
+        return "forward:/postbody/findPostbody/" + post_id + ".do";
+    }
+
+    @RequestMapping("/deletePost.do")
+    public String deletePost(int post_id, HttpServletRequest request){
+        ReturnInfo returnInfo = postService.deletePost(post_id);
+        request.setAttribute("result",returnInfo.getInfo());
+        return "forward:/post/findPostAll.do";
     }
 
 }

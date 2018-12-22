@@ -2,6 +2,8 @@ package com.bbs.controller;
 
 import com.bbs.entity.Category;
 import com.bbs.service.ICategoryService;
+import com.bbs.util.ReturnInfo;
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +35,44 @@ public class CategoryController {
         List<Category> categories = categoryService.findCategoryAll();
         request.setAttribute("categories",categories);
         return "/category";
+    }
+
+    /**
+     * 添加分类
+     * @param category
+     * @param request
+     * @return
+     */
+    @RequestMapping("/addCategory.do")
+    public String addCategory(Category category, HttpServletRequest request){
+        ReturnInfo returnInfo = categoryService.insertCategory(category);
+        request.setAttribute("result",returnInfo.getInfo());
+        return "forward:/category/findCategoryToIndex.do";
+    }
+
+    /**
+     * 删除分类
+     * @param category_id
+     * @param request
+     * @return
+     */
+    @RequestMapping("/deleteCategory.do")
+    public String deleteCategory(int category_id, HttpServletRequest request){
+        ReturnInfo returnInfo = categoryService.deleteCategory(category_id);
+        request.setAttribute("result",returnInfo.getInfo());
+        return "forward:/category/findCategoryToIndex.do";
+    }
+
+    /**
+     * 更新分类
+     * @param category
+     * @param request
+     * @return
+     */
+    @RequestMapping("/updateCategory.do")
+    public String updateCategory(Category category, HttpServletRequest request){
+        ReturnInfo returnInfo = categoryService.updateCategory(category);
+        request.setAttribute("result",returnInfo.getInfo());
+        return "forward:/category/findCategoryToIndex.do";
     }
 }

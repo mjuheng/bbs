@@ -31,9 +31,6 @@ public class PostbodyController {
     public String findPostbody(@PathVariable Integer id, HttpServletRequest request){
         List<Postbody> postbodys = postbodyService.findPostbody(id);
         request.setAttribute("postbodys",postbodys);
-        request.setAttribute("postbodys",postbodys);
-        request.setAttribute("postbodys",postbodys);
-        request.setAttribute("postbodys",postbodys);
         return "/postbody";
     }
 
@@ -67,7 +64,7 @@ public class PostbodyController {
     @RequestMapping("/makeAdopt.do")
     public String makeAdopt(Integer post_id, Integer postbody_id, HttpServletRequest request){
         ReturnInfo returnInfo = postbodyService.makeAdopt(post_id, postbody_id);
-        request.setAttribute("result",returnInfo);
+        request.setAttribute("result",returnInfo.getInfo());
         return "forward:/postbody/findPostbody/" + post_id + ".do";
     }
 

@@ -12,11 +12,19 @@
     <title>内容</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/global.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/layui/layui.all.js"></script>
 </head>
 <body>
+
 <c:if test="${requestScope.sendResult != null}">
     <script>
+
         alert("${requestScope.sendResult}")
+    </script>
+</c:if>
+<c:if test="${requestScope.result != null}">
+    <script>
+        alert("${requestScope.result}")
     </script>
 </c:if>
 <form action="${pageContext.request.contextPath}/post/findPostByTitle.do" method="get" style="position: absolute;left: 0px;top: 0px;">
@@ -80,6 +88,8 @@
 
     </ul>
 </div>
+<script>
 
+</script>
 </body>
 </html>

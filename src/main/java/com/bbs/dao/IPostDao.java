@@ -83,4 +83,31 @@ public interface IPostDao {
      * @return
      */
     int findCountByConsumerId(int id);
+
+    /**
+     * 查找置顶帖子数
+     * @return
+     */
+    int findPeakCount();
+
+    /**
+     * 置顶帖子
+     * @param id
+     * @return
+     */
+    int makePeakById(int id);
+
+    /**
+     * 取消置顶
+     * @param id
+     * @return
+     */
+    int removePeak(int id);
+
+    /**
+     * 根据id，删除帖子
+     * @param id
+     * @return
+     */
+    int deleteById(int id);
 }

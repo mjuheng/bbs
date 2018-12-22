@@ -13,6 +13,7 @@ public class Consumer implements Serializable {
     private String gender;          //性别
     private String note;            //个人签名
     private String career;          //职业
+    private Boolean admin;          //是否为管理员
 
     public String getPassword() {
         return password;
@@ -84,5 +85,13 @@ public class Consumer implements Serializable {
 
     public void setCareer(String career) {
         this.career = career;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 }

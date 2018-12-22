@@ -52,6 +52,50 @@ public class PostService implements IPostService {
     }
 
     @Override
+    public ReturnInfo makePeak(int post_id) {
+        ReturnInfo returnInfo = new ReturnInfo();
+        returnInfo.setInfo("置顶成功");
+        //如果置顶帖子数总数超过3，则不能置顶（最大置顶数3）
+        int peakNum = postDao.findPeakCount();
+        if (peakNum < 3){
+            //将帖子设置为置顶状态
+            int row = postDao.makePeakById(post_id);
+            if (row == 0){
+                returnInfo.setCode(-1);
+                returnInfo.setInfo("置顶失败");
+            }
+        } else {
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("指定总数不能超过三，置顶失败");
+        }
+        return returnInfo;
+    }
+
+    @Override
+    public ReturnInfo removePeak(int post_id) {
+        ReturnInfo returnInfo = new ReturnInfo();
+        returnInfo.setInfo("置顶已取消");
+        int row = postDao.removePeak(post_id);
+        if (row == 0){
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("取消失败");
+        }
+        return returnInfo;
+    }
+
+    @Override
+    public ReturnInfo deletePost(int post_id) {
+        ReturnInfo returnInfo = new ReturnInfo();
+        returnInfo.setInfo("删除成功");
+        int row = postDao.deleteById(post_id);
+        if (row == 0){
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("删除失败");
+        }
+        return returnInfo;
+    }
+
+    @Override
     public List<Post> findPostByTitle(String title) {
         return postDao.findPostByTitle(title);
     }
