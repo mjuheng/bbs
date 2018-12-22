@@ -50,9 +50,9 @@ public class PostbodyController {
 
         ReturnInfo returnInfo = postbodyService.writingDiscuss(postbody);
         if (returnInfo.getCode() == 0){
-            request.setAttribute("writingResult","评论成功");
+            request.setAttribute("result","评论成功");
         }else {
-            request.setAttribute("writingResult","评论失败");
+            request.setAttribute("result","评论失败");
         }
         return "forward:/postbody/findPostbody/" + postbody.getPost_id() + ".do";
     }
@@ -76,7 +76,7 @@ public class PostbodyController {
     @RequestMapping("/deletePost.do")
     public String deletePost(Integer post_id, Integer postbody_id, HttpServletRequest request){
         ReturnInfo returnInfo = postbodyService.deleteById(post_id, postbody_id);
-        request.setAttribute("result",returnInfo);
+        request.setAttribute("result",returnInfo.getInfo());
         return "forward:/postbody/findPostbody/" + post_id + ".do";
     }
 }

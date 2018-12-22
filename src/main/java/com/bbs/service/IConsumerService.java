@@ -43,8 +43,10 @@ public interface IConsumerService {
     /**
      * 修改用户密码
      * @param consumer
-     * @param oldPassword
+     * @param confirm_password
      * @return
      */
     ReturnInfo updatePassword(Consumer consumer, String confirm_password);
+
+    Consumer findBasicInfo(int consumer_id);
 }

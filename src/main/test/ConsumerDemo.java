@@ -4,18 +4,13 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ConsumerDemo {
-    ApplicationContext applicationContext;
+import java.util.HashMap;
 
-    @Before
-    public void defore(){
-        applicationContext = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
-    }
+public class ConsumerDemo {
+
 
     @Test
     public void checkUsername(){
-        IConsumerService consumerService = (IConsumerService) applicationContext.getBean("consumerService");
-        int tom = consumerService.checkUsername("tom");
-        return;
+
     }
 }

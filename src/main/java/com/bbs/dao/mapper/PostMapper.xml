@@ -12,6 +12,7 @@
         <result property="replyNum" column="replyNum" />
         <result property="watchNum" column="watchNum" />
         <association property="consumer" javaType="Consumer">
+            <result property="id" column="consumer_id" />
             <result property="username" column="username" />
             <result property="headImage" column="headImage" />
         </association>
@@ -21,7 +22,7 @@
     </resultMap>
 
     <sql id="findPost">
-        SELECT post.*,consumer.username,consumer.headImage,category.name FROM post,consumer,category
+        SELECT post.*,consumer.username,consumer.headImage,consumer.id,category.name FROM post,consumer,category
         WHERE post.consumer_id = consumer.id
         AND post.category_id = category.id
     </sql>

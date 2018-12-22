@@ -4,6 +4,7 @@ import com.bbs.dao.IConsumerDao;
 import com.bbs.entity.Consumer;
 import com.bbs.service.IConsumerService;
 import com.bbs.util.ReturnInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,11 @@ public class ConsumerService implements IConsumerService {
             returnInfo.setInfo("修改失败");
         }
         return returnInfo;
+    }
+
+    @Override
+    public Consumer findBasicInfo(int consumer_id) {
+        return consumerDao.findBasicInfoById(consumer_id);
     }
 
     @Override

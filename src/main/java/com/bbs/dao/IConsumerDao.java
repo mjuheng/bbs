@@ -36,4 +36,11 @@ public interface IConsumerDao {
      * @return
      */
     int updatePassword(Consumer consumer);
+
+    /**
+     * 根据id，查询基本信息
+     * @param id
+     * @return
+     */
+    Consumer findBasicInfoById(int id);
 }

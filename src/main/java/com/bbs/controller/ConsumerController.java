@@ -1,6 +1,8 @@
 package com.bbs.controller;
 
+import com.bbs.entity.Attention;
 import com.bbs.entity.Consumer;
+import com.bbs.service.IAttentionService;
 import com.bbs.service.IConsumerService;
 import com.bbs.util.ReturnInfo;
 import com.google.code.kaptcha.Producer;
@@ -29,6 +31,8 @@ public class ConsumerController {
     private IConsumerService consumerService;
     @Autowired
     private Producer captchaProducer;
+    @Autowired
+    private IAttentionService attentionService;
 
     /**
      * 注册操作
@@ -191,10 +195,33 @@ public class ConsumerController {
         return "/consumerDetail";
     }
 
+    /**
+     * 退出登录
+     * @param session
+     * @return
+     */
     @RequestMapping("/exit.do")
     public String exit(HttpSession session){
         session.removeAttribute("consumer");
         return "/head";
+    }
+
+    @RequestMapping("/findBasicInfo.do")
+    public String findBasicInfo(int consumer_id, HttpServletRequest request){
+        Consumer basicConsumerInfo = consumerService.findBasicInfo(consumer_id);
+        //查看两人是否已关注
+        Attention attention = new Attention();
+        Consumer consumer = (Consumer) request.getSession().getAttribute("consumer");
+        if (consumer != null){
+            attention.setFromConsumer_id(consumer.getId());
+            attention.setToConsumer_id(consumer_id);
+            boolean flag = attentionService.checkAttention(attention);
+            if (flag){
+                request.setAttribute("isAttention",true);
+            }
+        }
+        request.setAttribute("basicConsumerInfo", basicConsumerInfo);
+        return "/showDetail";
     }
 
 }

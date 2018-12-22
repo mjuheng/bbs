@@ -15,9 +15,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/global.css">
 </head>
 <body>
-<c:if test="${result != null}">
+<c:if test="${requestScope.result != null}">
     <script>
-        alert("${requestScope.result}")
+        layer.open({
+            type: 0,
+            title: '操作结果',
+            content:'${requestScope.result}'
+        });
+        setTimeout(function (){
+            layer.closeAll();
+        }, 1000);
     </script>
 </c:if>
 

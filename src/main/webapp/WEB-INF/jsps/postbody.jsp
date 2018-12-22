@@ -12,16 +12,19 @@
     <title>帖子内容</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/layui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/global.css">
+    <script type="text/javascript" src="${pageContext.request.contextPath}/layui/layui.all.js"></script>
 </head>
 <body>
-<c:if test="${requestScope.writingResult != null}">
-    <script>
-        alert("${requestScope.writingResult}")
-    </script>
-</c:if>
 <c:if test="${requestScope.result != null}">
     <script>
-        alert("${requestScope.result}")
+        layer.open({
+            type: 0,
+            title: '操作结果',
+            content:'${requestScope.result}'
+        });
+        setTimeout(function (){
+            layer.closeAll();
+        }, 1000);
     </script>
 </c:if>
 <div class="layui-container">
@@ -30,13 +33,15 @@
             <div class="fly-panel detail-box" style="height: 300px">
                 <h1>${requestScope.postbodys[0].post.title}</h1>
                 <div class="fly-detail-info">
-                    <c:if test="${requestScope.postbodys[0].post.peak == false}">
+                    <c:if test="${sessionScope.consumer.admin == true && requestScope.postbodys[0].post.peak == false}">
                         <span class="layui-badge layui-bg-red"><a href="${pageContext.request.contextPath}/post/makePeak.do?post_id=${requestScope.postbodys[0].post.id}">置顶</a></span>
                     </c:if>
-                    <c:if test="${requestScope.postbodys[0].post.peak == true}">
+                    <c:if test="${sessionScope.consumer.admin == true && requestScope.postbodys[0].post.peak == true}">
                         <span class="layui-badge layui-bg-red"><a href="${pageContext.request.contextPath}/post/removePeak.do?post_id=${requestScope.postbodys[0].post.id}">取消置顶</a></span>
                     </c:if>
-                    <span class="layui-btn layui-btn-xs jie-admin" type="del"><a href="${pageContext.request.contextPath}/post/deletePost.do?post_id=${requestScope.postbodys[0].post.id}">删除</a></span>
+                    <c:if test="${sessionScope.consumer.id == requestScope.postbodys[0].consumer.id || sessionScope.consumer.admin == true}">
+                        <span class="layui-btn layui-btn-xs jie-admin" type="del"><a href="${pageContext.request.contextPath}/post/deletePost.do?post_id=${requestScope.postbodys[0].post.id}">删除</a></span>
+                    </c:if>
                     <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
 
                     <br />
@@ -53,7 +58,7 @@
                         <img src="${requestScope.postbodys[0].consumer.headImage}" alt="贤心">
                     </a>
                     <div class="fly-detail-user">
-                        <a href="../user/home.html" class="fly-link">
+                        <a href="#" class="fly-link" onclick="showConsumerDetail(${requestScope.postbodys[0].consumer.id})">
                             <cite>${requestScope.postbodys[0].consumer.username}</cite>
                         </a>
                         <span>${requestScope.postbodys[0].formatReplyTime}</span>
@@ -84,7 +89,7 @@
                                     <img src="${postbody.consumer.headImage}" alt="头像">
                                 </a>
                                 <div class="fly-detail-user">
-                                    <a href="" class="fly-link">
+                                    <a href="#" class="fly-link" onclick="showConsumerDetail(${postbody.consumer.id})">
                                         <cite>${postbody.consumer.username}</cite>
                                     </a>
                                 </div>
@@ -144,6 +149,25 @@
 
 
 <script src="${pageContext.request.contextPath}/layui/layui.js"></script>
+<script>
+    function showConsumerDetail(id) {
+        var consumer_id = ${sessionScope.consumer.id};
+        if (consumer_id === id){
+            window.top.document.getElementById("content").src = "/opt/consumerDetail.do";
+        } else {
+            layui.use('layer', function () {
+                var layer = layui.layer;
 
+                layer.open({
+                    type: 2,
+                    title: '个人信息',
+                    shadeClose: false,
+                    area: ['300px', '370px'],
+                    content: '/consumer/findBasicInfo.do?consumer_id=' + id
+                });
+            });
+        }
+    }
+</script>
 </body>
 </html>

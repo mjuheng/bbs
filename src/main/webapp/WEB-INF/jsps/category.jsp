@@ -69,7 +69,6 @@
     function refresh() {
         top.location.href = "/index.jsp"
     }
-    Onclien
 </script>
 </body>
 </html>

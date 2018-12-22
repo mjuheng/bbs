@@ -5,7 +5,6 @@ import com.bbs.entity.Category;
 import com.bbs.service.ICategoryService;
 import com.bbs.util.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +19,12 @@ public class CategoryService implements ICategoryService {
     public ReturnInfo updateCategory(Category category) {
         ReturnInfo returnInfo = new ReturnInfo();
         returnInfo.setInfo("分类修改成功");
-        categoryDao.updateNameById(category);
+        try {
+            categoryDao.updateNameById(category);
+        } catch (org.springframework.dao.DuplicateKeyException e){
+            returnInfo.setCode(-1);
+            returnInfo.setInfo("该分类名已存在");
+        }
         return returnInfo;
     }
 

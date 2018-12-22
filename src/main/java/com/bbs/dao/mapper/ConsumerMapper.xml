@@ -40,4 +40,10 @@
         SET password= #{password}
         WHERE id = #{id}
     </update>
+
+    <!--根据id，查询基本信息-->
+    <select id="findBasicInfoById" parameterType="Integer" resultType="Consumer">
+        SELECT id,username,city,note,headImage FROM consumer
+        WHERE id = #{id}
+    </select>
 </mapper>

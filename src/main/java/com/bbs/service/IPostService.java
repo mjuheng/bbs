@@ -76,4 +76,5 @@ public interface IPostService {
      */
     ReturnInfo deletePost(int post_id);
 
+
 }

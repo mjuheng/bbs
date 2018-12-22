@@ -11,5 +11,6 @@
         <mapper resource="com/bbs/dao/mapper/CategoryMapper.xml" />
         <mapper resource="com/bbs/dao/mapper/PostMapper.xml" />
         <mapper resource="com/bbs/dao/mapper/PostbodyMapper.xml" />
+        <mapper resource="com/bbs/dao/mapper/AttentionMapper.xml" />
     </mappers>
 </configuration>

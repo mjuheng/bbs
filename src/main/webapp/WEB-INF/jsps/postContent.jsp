@@ -18,13 +18,26 @@
 
 <c:if test="${requestScope.sendResult != null}">
     <script>
-
-        alert("${requestScope.sendResult}")
+        layer.open({
+            type: 0,
+            title: '操作结果',
+            content:'${requestScope.sendResult}'
+        });
+        setTimeout(function (){
+            layer.closeAll();
+        }, 1000);
     </script>
 </c:if>
 <c:if test="${requestScope.result != null}">
     <script>
-        alert("${requestScope.result}")
+        layer.open({
+            type: 0,
+            title: '操作结果',
+            content:'${requestScope.result}'
+        });
+        setTimeout(function (){
+            layer.closeAll();
+        }, 1000);
     </script>
 </c:if>
 <form action="${pageContext.request.contextPath}/post/findPostByTitle.do" method="get" style="position: absolute;left: 0px;top: 0px;">
@@ -43,13 +56,13 @@
         <c:forEach items="${requestScope.peakPosts}" var="post">
             <li>
                 <a href="#" class="fly-avatar">
-                    <img src="${post.consumer.headImage}" alt="贤心">
+                    <img src="${post.consumer.headImage}" alt="头像">
                 </a>
                 <h2>
                     <a href="/postbody/findPostbody/${post.id}.do">[${post.category.name}]${post.title}</a>
                 </h2>
                 <div class="fly-list-info">
-                    <a href="user/home.html" link>
+                    <a href="#" onclick="showConsumerDetail(${post.consumer.id})">
                         <cite>${post.consumer.username}</cite>
                     </a>
                     <span>${post.formatLastTime}</span>
@@ -76,7 +89,7 @@
                     <a href="/postbody/findPostbody/${post.id}.do">[${post.category.name}]${post.title}</a>
                 </h2>
                 <div class="fly-list-info">
-                    <a href="user/home.html" link>
+                    <a href="#" onclick="showConsumerDetail(${post.consumer.id})">
                         <cite>${post.consumer.username}</cite>
                     </a>
                     <span>${post.formatLastTime}</span>
@@ -89,7 +102,24 @@
     </ul>
 </div>
 <script>
+    function showConsumerDetail(id) {
+        var consumer_id = '${sessionScope.consumer.id}';
+        if (consumer_id === id){
+            window.top.document.getElementById("content").src = "/opt/consumerDetail.do";
+        } else {
+            layui.use('layer', function () {
+                var layer = layui.layer;
 
+                layer.open({
+                    type: 2,
+                    title: '个人信息',
+                    shadeClose: false,
+                    area: ['300px', '370px'],
+                    content: '/consumer/findBasicInfo.do?consumer_id=' + id
+                });
+            });
+        }
+    }
 </script>
 </body>
 </html>

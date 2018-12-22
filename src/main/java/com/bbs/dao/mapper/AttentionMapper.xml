@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.IAttentionDao">
+
+    <!--添加关注-->
+    <insert id="insertAttention" parameterType="Attention">
+        INSERT INTO attention(fromConsumer_id,toConsumer_id)
+        VALUE (#{fromConsumer_id},#{toConsumer_id})
+    </insert>
+
+    <!--查看是否已关注-->
+    <select id="checkAttention" parameterType="Attention" resultType="Integer">
+        SELECT COUNT(*) FROM attention
+        WHERE fromConsumer_id = #{fromConsumer_id}
+        AND toConsumer_id = #{toConsumer_id}
+    </select>
+
+    <!--取消关注-->
+    <delete id="deleteAttention" parameterType="Attention">
+        DELETE FROM attention
+        WHERE fromConsumer_id = #{fromConsumer_id}
+        AND toConsumer_id = #{toConsumer_id}
+    </delete>
+</mapper>
