@@ -59,7 +59,7 @@
                     <img src="${post.consumer.headImage}" alt="头像">
                 </a>
                 <h2>
-                    <a href="/postbody/findPostbody/${post.id}.do">[${post.category.name}]${post.title}</a>
+                    <a href="/postbody/findPostbody/${post.id}.do">【${post.category.name}】&nbsp;&nbsp;&nbsp;${post.title}</a>
                 </h2>
                 <div class="fly-list-info">
                     <a href="#" onclick="showConsumerDetail(${post.consumer.id})">
@@ -86,7 +86,7 @@
                     <img src="${post.consumer.headImage}" alt="贤心">
                 </a>
                 <h2>
-                    <a href="/postbody/findPostbody/${post.id}.do">[${post.category.name}]${post.title}</a>
+                    <a href="/postbody/findPostbody/${post.id}.do">【${post.category.name}】&nbsp;&nbsp;&nbsp;${post.title}</a>
                 </h2>
                 <div class="fly-list-info">
                     <a href="#" onclick="showConsumerDetail(${post.consumer.id})">

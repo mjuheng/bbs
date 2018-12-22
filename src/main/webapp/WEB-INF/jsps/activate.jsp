@@ -65,7 +65,7 @@
                     <ul class="mine-view jie-row">
                         <c:forEach items="${requestScope.posts}" var="post">
                             <li>
-                                <a class="jie-title" href="/postbody/findPostbody/${post.id}.do">[${post.category.name}]${post.title}</a>
+                                <a class="jie-title" href="/postbody/findPostbody/${post.id}.do">【${post.category.name}】${post.title}</a>
                                 <i>${post.formatLastTime}</i>
                                 <em>${post.watchNum}阅/${post.replyNum}答</em>
                             </li>
