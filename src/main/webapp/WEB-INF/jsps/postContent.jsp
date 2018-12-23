@@ -16,18 +16,6 @@
 </head>
 <body>
 
-<c:if test="${requestScope.sendResult != null}">
-    <script>
-        layer.open({
-            type: 0,
-            title: '操作结果',
-            content:'${requestScope.sendResult}'
-        });
-        setTimeout(function (){
-            layer.closeAll();
-        }, 1000);
-    </script>
-</c:if>
 <c:if test="${requestScope.result != null}">
     <script>
         layer.open({

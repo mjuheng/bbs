@@ -1,5 +1,6 @@
 package com.bbs.dao;
 
+import com.bbs.entity.Consumer;
 import com.bbs.entity.Post;
 
 import java.util.List;
@@ -110,4 +111,11 @@ public interface IPostDao {
      * @return
      */
     int deleteById(int id);
+
+    /**
+     * 根据帖子id查询所有人
+     * @param id
+     * @return
+     */
+    Consumer findConsumerByPostId(int id);
 }

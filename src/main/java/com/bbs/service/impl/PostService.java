@@ -1,10 +1,10 @@
 package com.bbs.service.impl;
 
-import com.bbs.dao.ICategoryDao;
-import com.bbs.dao.IPostDao;
-import com.bbs.dao.IPostbodyDao;
+import com.bbs.dao.*;
+import com.bbs.entity.Consumer;
 import com.bbs.entity.Post;
 import com.bbs.entity.Postbody;
+import com.bbs.entity.PrivateMessage;
 import com.bbs.entity.custom.WritingPostCustom;
 import com.bbs.service.IPostService;
 import com.bbs.util.ReturnInfo;
@@ -24,6 +24,10 @@ public class PostService implements IPostService {
     private IPostDao postDao;
     @Autowired
     private IPostbodyDao postbodyDao;
+    @Autowired
+    private IAttentionDao attentionDao;
+    @Autowired
+    private IPrivateMessageDao privateMessageDao;
 
     @Override
     public List<Post> findByCategory(String category) {
@@ -123,6 +127,26 @@ public class PostService implements IPostService {
         postbody.setReplyTime(date);
         postbody.setPost_id(post.getId());
         postbodyDao.insertPostbody(postbody);
+        //发帖时发送通知
+        sendMessage(writingPostCustom.getConsumer_id(),post.getId());
         return returnInfo;
+    }
+
+    private void sendMessage(int consumer_id, int post_id){
+        List<Integer> attention = attentionDao.findAttention(consumer_id);
+        PrivateMessage message = new PrivateMessage();
+
+        //分装参数
+        message.setFromConsumer_id(consumer_id);
+        message.setContent("发表了新帖");
+        message.setSendTime(new Date());
+        message.setPost_id(post_id);
+        //添加数据库
+        for (Integer i: attention){
+            message.setConsumer_id(i);
+            privateMessageDao.insertMessage(message);
+        }
+
+
     }
 }

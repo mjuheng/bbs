@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.dao.IPrivateMessageDao">
+
+    <resultMap id="messageAndConsumerAndPost" type="PrivateMessage">
+        <id property="id" column="id" />
+        <result property="content" column="content" />
+        <result property="read" column="read" />
+        <result property="sendTime" column="sendTime" />
+        <association property="fromConsumer" javaType="Consumer">
+            <id column="fromConsumer_id" property="id" />
+            <result column="username" property="username" />
+        </association>
+        <association property="post" javaType="Post">
+            <id column="post_id" property="id" />
+            <result column="title" property="title" />
+        </association>
+    </resultMap>
+
+    <!--查找单个用户的全部消息-->
+    <select id="findAllById" parameterType="Integer" resultMap="messageAndConsumerAndPost">
+        SELECT privatemessage.*,consumer.id,consumer.username,post.id,post.title FROM privatemessage,consumer,post
+        WHERE privatemessage.fromConsumer_id = consumer.id
+        AND privatemessage.post_id = post.id
+        AND privatemessage.consumer_id = #{id}
+        ORDER BY privatemessage.id DESC
+    </select>
+
+    <!--根据id删除消息-->
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM privatemessage
+        WHERE id = #{id}
+    </delete>
+
+    <!--插入信息-->
+    <insert id="insertMessage" parameterType="PrivateMessage">
+        INSERT INTO privatemessage(content,sendTime,fromConsumer_id,consumer_id,post_id)
+        VALUE (#{content},#{sendTime},#{fromConsumer_id},#{consumer_id},#{post_id})
+    </insert>
+
+    <!--根据用户ID删除全部消息-->
+    <delete id="deleteByConsumerId" parameterType="Integer">
+        DELETE FROM privatemessage
+        WHERE consumer_id = #{id}
+    </delete>
+
+
+</mapper>

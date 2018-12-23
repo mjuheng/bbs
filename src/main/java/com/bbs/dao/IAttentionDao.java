@@ -2,6 +2,8 @@ package com.bbs.dao;
 
 import com.bbs.entity.Attention;
 
+import java.util.List;
+
 public interface IAttentionDao {
     /**
      * 添加关注
@@ -23,4 +25,11 @@ public interface IAttentionDao {
      * @return
      */
     int deleteAttention(Attention attention);
+
+    /**
+     * 查看所有关注此人的用户
+     * @param toConsumer_id
+     * @return
+     */
+    List<Integer> findAttention(int toConsumer_id);
 }

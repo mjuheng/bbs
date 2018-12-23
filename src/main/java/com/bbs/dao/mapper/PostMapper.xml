@@ -128,4 +128,12 @@
         DELETE FROM post
         WHERE id = #{id}
     </delete>
+
+    <!--根据帖子id，查找所发贴人-->
+    <select id="findConsumerByPostId" parameterType="Integer" resultType="Consumer">
+        SELECT id FROM consumer
+        WHERE id = (SELECT consumer_id FROM post
+	                WHERE post.id = #{id}
+                   )
+    </select>
 </mapper>

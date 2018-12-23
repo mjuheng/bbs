@@ -23,4 +23,10 @@
         WHERE fromConsumer_id = #{fromConsumer_id}
         AND toConsumer_id = #{toConsumer_id}
     </delete>
+
+    <!--查找关注此用户的所有人-->
+    <select id="findAttention" parameterType="Integer" resultType="Integer">
+        SELECT fromConsumer_id FROM attention
+        WHERE toConsumer_id = #{id}
+    </select>
 </mapper>

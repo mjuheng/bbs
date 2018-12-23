@@ -12,5 +12,6 @@
         <mapper resource="com/bbs/dao/mapper/PostMapper.xml" />
         <mapper resource="com/bbs/dao/mapper/PostbodyMapper.xml" />
         <mapper resource="com/bbs/dao/mapper/AttentionMapper.xml" />
+        <mapper resource="com/bbs/dao/mapper/PrivateMessageMapper.xml" />
     </mappers>
 </configuration>

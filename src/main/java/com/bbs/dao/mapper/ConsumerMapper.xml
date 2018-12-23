@@ -46,4 +46,6 @@
         SELECT id,username,city,note,headImage FROM consumer
         WHERE id = #{id}
     </select>
+
+
 </mapper>

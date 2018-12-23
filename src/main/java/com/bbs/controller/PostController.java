@@ -34,15 +34,16 @@ public class PostController {
         try {
             consumer_id = consumer.getId();
         } catch (NullPointerException e){
-            request.setAttribute("sendResult","发帖失败");
-            return "/postContent";
+            //抛出异常，表示用户未登录，跳到登录页面
+            request.setAttribute("result","发帖失败");
+            return "/login";
         }
         writingPostCustom.setConsumer_id(consumer_id);
         ReturnInfo returnInfo = postService.writingPost(writingPostCustom);
         if (returnInfo.getCode() == 0){
-            request.setAttribute("sendResult","发帖成功");
+            request.setAttribute("result","发帖成功");
         }else {
-            request.setAttribute("sendResult","发帖失败");
+            request.setAttribute("result","发帖失败");
         }
         return "forward:/post/findPostAll.do";
     }
