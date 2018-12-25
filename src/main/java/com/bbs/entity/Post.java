@@ -1,5 +1,7 @@
 package com.bbs.entity;
 
+import com.bbs.util.Page;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -10,7 +12,7 @@ public class Post {
     private Date lastTime;      //最后回复时间
     private Boolean resolve;    //是否解决
     private Boolean peak;       //是否置顶
-    private Integer watchNum;
+    private Integer watchNum;   //浏览数
     private Integer replyNum;   //回复数量
     private Integer category_id;
     private Integer consumer_id;
@@ -128,16 +130,9 @@ public class Post {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", firstTime=" + firstTime +
-                ", lastTime=" + lastTime +
-                ", resolve=" + resolve +
-                ", peak=" + peak +
-                ", replyNum=" + replyNum +
-                '}';
+    public void setFormatLastTime(String formatLastTime) {
+        this.formatLastTime = formatLastTime;
     }
+
+
 }

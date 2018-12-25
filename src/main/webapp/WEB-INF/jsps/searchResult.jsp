@@ -14,11 +14,18 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/layui/css/global.css">
 </head>
 <body>
-<form action="#" method="get" style="position: absolute;left: 0px;top: 0px;">
-    <input type="text" placeholder="搜索内容" name="searchContent" style="height: 40px;width: 500px;">
-    <input type="submit" class="layui-btn" value="搜索">
-    <button class="layui-btn"><a href="${pageContext.request.contextPath}/category/findCategoryAll.do" style="">发帖</a></button>
-</form>
+<div style="height: 40px;">
+    <div style="float: left">
+        <form action="${pageContext.request.contextPath}/post/findPostByTitle.do" method="get" style="position: absolute;left: 0px;top: 0px;">
+
+            <input type="text" placeholder="搜索内容" name="title" style="height: 40px;width: 500px;">
+            <input type="submit" class="layui-btn" value="搜索">
+        </form>
+    </div>
+    <div style="float: left">
+        <button class="layui-btn" onclick="toWriting()">发帖</button>
+    </div>
+</div>
 
 
 <div class="fly-panel">
@@ -48,6 +55,10 @@
 
     </ul>
 </div>
-
+<script>
+    function toWriting() {
+        window.location.href = "${pageContext.request.contextPath}/category/findCategoryAll.do";
+    }
+</script>
 </body>
 </html>

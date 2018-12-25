@@ -28,13 +28,18 @@
         }, 1000);
     </script>
 </c:if>
-<form action="${pageContext.request.contextPath}/post/findPostByTitle.do" method="get" style="position: absolute;left: 0px;top: 0px;">
+<div style="height: 40px;">
+    <div style="float: left">
+        <form action="${pageContext.request.contextPath}/post/findPostByTitle.do" method="get" style="position: absolute;left: 0px;top: 0px;">
 
-    <input type="text" placeholder="搜索内容" name="title" style="height: 40px;width: 500px;">
-    <input type="submit" class="layui-btn" value="搜索">
-    <button class="layui-btn"><a href="${pageContext.request.contextPath}/category/findCategoryAll.do">发帖</a></button>
-</form>
-
+            <input type="text" placeholder="搜索内容" name="title" style="height: 40px;width: 500px;">
+            <input type="submit" class="layui-btn" value="搜索">
+        </form>
+    </div>
+    <div style="float: left">
+        <button class="layui-btn" onclick="toWriting()">发帖</button>
+    </div>
+</div>
 
 <div class="fly-panel">
     <div class="fly-panel-title fly-filter">
@@ -88,8 +93,21 @@
         </c:forEach>
 
     </ul>
+    <br /><br /><br />
+    <button class="layui-btn" onclick="toUp()">上一页</button>
+    &nbsp;&nbsp;&nbsp;
+    <button class="layui-btn" onclick="toNext()">下一页</button>
+
 </div>
 <script>
+
+    function toUp() {
+        window.location.href = "/post/findPostAll/-1.do"
+    }
+    function toNext() {
+        window.location.href = "/post/findPostAll/1.do"
+    }
+
     function showConsumerDetail(id) {
         var consumer_id = '${sessionScope.consumer.id}';
         if (consumer_id === id){
@@ -103,10 +121,14 @@
                     title: '个人信息',
                     shadeClose: false,
                     area: ['300px', '370px'],
+                    offset: ['300px','300px'],
                     content: '/consumer/findBasicInfo.do?consumer_id=' + id
                 });
             });
         }
+    }
+    function toWriting() {
+        window.location.href = "${pageContext.request.contextPath}/category/findCategoryAll.do";
     }
 </script>
 </body>

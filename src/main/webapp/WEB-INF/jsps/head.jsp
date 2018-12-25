@@ -31,11 +31,17 @@
             <li class="layui-nav-item"><img src="${sessionScope.consumer.headImage}" width="50px" height="50px" alt="头像"/></li>
             <li class="layui-nav-item" onclick="findConsumerDetial(${sessionScope.consumer.id})">您好，${sessionScope.consumer.username}</li>
             <li class="layui-nav-item">&nbsp;&nbsp;&nbsp;</li>
+            <li class="layui-nav-item" onclick="windowsFresh()"><a href="${pageContext.request.contextPath}/message/findMessage.do" target="content"> 消息<c:if test="${countWithoutWatch != null && countWithoutWatch > 0}">(${countWithoutWatch})</c:if></a></li>
+            <li class="layui-nav-item">&nbsp;&nbsp;&nbsp;</li>
             <li class="layui-nav-item" onclick="toExit()">退出</li>
         </div>
     </c:if>
 </ul>
 <script>
+
+    function windowsFresh() {
+        window.location.href = "/opt/head.do";
+    }
 
     function toExit() {
         window.location.href = "/consumer/exit.do";
@@ -55,6 +61,10 @@
     }
     function toCreateAccount(){
         top.location.href = "/opt/createAccount.do";
+    }
+
+    function toSeeMail(){
+        window.location.href = "${pageContext.request.contextPath}/message/findMessage.do";
     }
 
     layui.use('element', function(){

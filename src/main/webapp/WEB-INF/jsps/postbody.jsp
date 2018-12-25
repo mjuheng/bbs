@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>帖子内容</title>
@@ -54,7 +55,7 @@
           </span>
                 </div>
                 <div class="detail-about">
-                    <a class="fly-avatar" href="../user/home.html">
+                    <a class="fly-avatar" href="#">
                         <img src="${requestScope.postbodys[0].consumer.headImage}" alt="贤心">
                     </a>
                     <div class="fly-detail-user">
@@ -119,9 +120,9 @@
                             </div>
                         </li>
                     </c:forEach>
-
+                    <c:if test="${fn:length(postbodys) == 1}"><li class="fly-none">消灭零回复</li></c:if>
                     <!-- 无数据时 -->
-                    <%--<li class="fly-none">消灭零回复</li>--%>
+                    <%--<li class="fly-none"></li>--%>
                 </ul>
 
                 <div class="layui-form layui-form-pane">
@@ -163,6 +164,7 @@
                     title: '个人信息',
                     shadeClose: false,
                     area: ['300px', '370px'],
+                    offset: ['300px','300px'],
                     content: '/consumer/findBasicInfo.do?consumer_id=' + id
                 });
             });

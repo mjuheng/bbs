@@ -7,6 +7,7 @@ import com.bbs.entity.Postbody;
 import com.bbs.entity.PrivateMessage;
 import com.bbs.entity.custom.WritingPostCustom;
 import com.bbs.service.IPostService;
+import com.bbs.util.Page;
 import com.bbs.util.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,8 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public List<Post> findAll() {
-        return postDao.findAll();
+    public List<Post> findAll(Page page) {
+        return postDao.findAll(page);
     }
 
     @Override
@@ -102,6 +103,11 @@ public class PostService implements IPostService {
     @Override
     public List<Post> findPostByTitle(String title) {
         return postDao.findPostByTitle(title);
+    }
+
+    @Override
+    public int countPost() {
+        return postDao.countPost();
     }
 
     @Override

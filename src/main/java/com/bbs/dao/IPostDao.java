@@ -2,6 +2,7 @@ package com.bbs.dao;
 
 import com.bbs.entity.Consumer;
 import com.bbs.entity.Post;
+import com.bbs.util.Page;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface IPostDao {
      * 查找全部的帖子
      * @return
      */
-    List<Post> findAll();
+    List<Post> findAll(Page page);
 
     /**
      * 访问时，访客加一
@@ -118,4 +119,10 @@ public interface IPostDao {
      * @return
      */
     Consumer findConsumerByPostId(int id);
+
+    /**
+     * 查找帖子总数
+     * @return
+     */
+    int countPost();
 }

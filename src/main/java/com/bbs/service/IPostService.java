@@ -2,6 +2,7 @@ package com.bbs.service;
 
 import com.bbs.entity.Post;
 import com.bbs.entity.custom.WritingPostCustom;
+import com.bbs.util.Page;
 import com.bbs.util.ReturnInfo;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface IPostService {
      * 查找全部帖子
      * @return
      */
-    List<Post> findAll();
+    List<Post> findAll(Page page);
 
     /**
      * 根据分类查找帖子
@@ -76,5 +77,9 @@ public interface IPostService {
      */
     ReturnInfo deletePost(int post_id);
 
-
+    /**
+     * 查找贴子总数
+     * @return
+     */
+    int countPost();
 }

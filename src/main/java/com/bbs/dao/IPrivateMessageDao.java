@@ -34,4 +34,17 @@ public interface IPrivateMessageDao {
      */
     int deleteByConsumerId(int id);
 
+    /**
+     * 未查看的消息数
+     * @param id
+     * @return
+     */
+    int countWithoutWatch(int id);
+
+    /**
+     * 将消息设置为已读
+     * @param id
+     * @return
+     */
+    int makeAlreadySee(int id);
 }

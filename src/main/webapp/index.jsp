@@ -28,7 +28,7 @@
         </iframe>
     </div>
     <div style="float: left;width: auto">
-        <iframe src="${pageContext.request.contextPath}/post/findPostAll.do" name="content" id="content"
+        <iframe src="${pageContext.request.contextPath}/post/findPostAll/0.do" name="content" id="content"
                 width="1500"
                 height="935px"
                 frameborder="0"

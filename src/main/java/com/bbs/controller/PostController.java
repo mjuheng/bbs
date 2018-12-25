@@ -4,6 +4,7 @@ import com.bbs.entity.Consumer;
 import com.bbs.entity.Post;
 import com.bbs.entity.custom.WritingPostCustom;
 import com.bbs.service.IPostService;
+import com.bbs.util.Page;
 import com.bbs.util.ReturnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,20 +46,38 @@ public class PostController {
         }else {
             request.setAttribute("result","发帖失败");
         }
-        return "forward:/post/findPostAll.do";
+        return "forward:/post/findPostAll/0.do";
     }
 
 
+    private static Page page = new Page();
     /**
      * 跳转到显示帖子首页
      * 查找全部的帖子与置顶帖子
-     * @param request
+     * @param opt
      * @return
      */
-    @RequestMapping("/findPostAll.do")
-    public String findPostAll(HttpServletRequest request){
+    @RequestMapping("/findPostAll/{opt}.do")
+    public String findPostAll(@PathVariable int opt, HttpServletRequest request){
+        //分页设置
+        Post post = new Post();
+        page.setNumEach(5);
+        if (postService.countPost() / page.getNumEach() != 0){
+            page.setPageTotal((postService.countPost() / page.getNumEach()) + 1);
+        }else {
+            page.setPageTotal(postService.countPost() / page.getNumEach());
+        }
+        //判断当前页数
+        if (opt == 0){
+            page.setPageNow(0);
+        }else if (opt == -1 ){
+            page.setPageNow(page.getPageNow() - 1);
+        }else {
+            page.setPageNow(page.getPageNow() + 1);
+        }
+
         List<Post> peakPosts = postService.findPostPeak();
-        List<Post> posts = postService.findAll();
+        List<Post> posts = postService.findAll(page);
         request.setAttribute("posts",posts);
         request.setAttribute("peakPosts",peakPosts);
         return "/postContent";
@@ -137,11 +156,17 @@ public class PostController {
         return "forward:/postbody/findPostbody/" + post_id + ".do";
     }
 
+    /**
+     * 删除帖子
+     * @param post_id
+     * @param request
+     * @return
+     */
     @RequestMapping("/deletePost.do")
     public String deletePost(int post_id, HttpServletRequest request){
         ReturnInfo returnInfo = postService.deletePost(post_id);
         request.setAttribute("result",returnInfo.getInfo());
-        return "forward:/post/findPostAll.do";
+        return "forward:/post/findPostAll/0.do";
     }
 
 }

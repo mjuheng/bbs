@@ -17,7 +17,15 @@ public class PrivateMessageService implements IPrivateMessageService {
 
     @Override
     public List<PrivateMessage> findMessage(int consumer_id) {
+        //将消息设置为已读
+        privateMessageDao.makeAlreadySee(consumer_id);
+        //返回结果集
         return privateMessageDao.findAllById(consumer_id);
+    }
+
+    @Override
+    public int countWithoutWatch(int consumer_id) {
+        return privateMessageDao.countWithoutWatch(consumer_id);
     }
 
     @Override

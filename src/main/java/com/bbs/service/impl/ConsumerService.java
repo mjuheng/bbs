@@ -3,6 +3,7 @@ package com.bbs.service.impl;
 import com.bbs.dao.IConsumerDao;
 import com.bbs.entity.Consumer;
 import com.bbs.service.IConsumerService;
+import com.bbs.util.MD5Utils;
 import com.bbs.util.ReturnInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class ConsumerService implements IConsumerService {
     @Override
     public ReturnInfo login(Consumer consumer) {
         ReturnInfo returnInfo = new ReturnInfo();
+        consumer.setPassword(MD5Utils.md5Password(consumer.getPassword()));
         Consumer c = consumerDao.findByUsernameAndPassword(consumer);
         //如果为空，则表示没有对应的账号，用户名或者密码错误
         if (c == null){
@@ -36,6 +38,8 @@ public class ConsumerService implements IConsumerService {
      */
     @Override
     public void createAccount(Consumer consumer) throws DuplicateKeyException{
+        //MD5加密
+        consumer.setPassword(MD5Utils.md5Password(consumer.getPassword()));
         consumerDao.insertConsumer(consumer);
     }
 

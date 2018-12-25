@@ -3,7 +3,6 @@ package com.bbs.controller;
 import com.bbs.entity.Category;
 import com.bbs.service.ICategoryService;
 import com.bbs.util.ReturnInfo;
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +26,7 @@ public class CategoryController {
     public String findCategoryAll(HttpServletRequest request){
         List<Category> categories = categoryService.findCategoryAll();
         request.setAttribute("categories",categories);
-        return "forward:/opt/writingPost.do";
+        return "/writingPost";
     }
 
     @RequestMapping("/findCategoryToIndex.do")

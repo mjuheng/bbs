@@ -34,9 +34,10 @@
     </insert>
 
     <!--查找全部的帖子-->
-    <select id="findAll" resultMap="postAndConsumerNameAndCategoryName">
+    <select id="findAll" resultMap="postAndConsumerNameAndCategoryName" parameterType="com.bbs.util.Page">
         <include refid="findPost" />
         ORDER BY post.id DESC
+        LIMIT #{startPosition},#{numEach}
     </select>
 
     <!--访问时，观看人数加一-->
@@ -135,5 +136,10 @@
         WHERE id = (SELECT consumer_id FROM post
 	                WHERE post.id = #{id}
                    )
+    </select>
+
+    <!--查找帖子总数-->
+    <select id="countPost" resultType="Integer">
+        SELECT COUNT(*) FROM post
     </select>
 </mapper>

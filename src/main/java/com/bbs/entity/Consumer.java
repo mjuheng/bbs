@@ -94,4 +94,5 @@ public class Consumer implements Serializable {
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
+
 }

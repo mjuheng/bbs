@@ -27,4 +27,11 @@ public interface IPrivateMessageService {
      * @return
      */
     ReturnInfo deleteByConsumerId(int consumer_id);
+
+    /**
+     * 未查看的消息数
+     * @param consumer_id
+     * @return
+     */
+    int countWithoutWatch(int consumer_id);
 }

@@ -84,4 +84,16 @@
         </property>
     </bean>
     <!--验证码设置-->
+
+    <!--过滤器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/attention/**" />
+            <mvc:mapping path="/postbody/**" />
+            <mvc:mapping path="/message/**" />
+
+            <bean class="com.bbs.interceptor.AuthorityInterceptor" />
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 </beans>

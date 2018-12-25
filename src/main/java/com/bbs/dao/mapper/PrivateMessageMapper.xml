@@ -7,7 +7,7 @@
     <resultMap id="messageAndConsumerAndPost" type="PrivateMessage">
         <id property="id" column="id" />
         <result property="content" column="content" />
-        <result property="read" column="read" />
+        <result property="watch" column="watch" />
         <result property="sendTime" column="sendTime" />
         <association property="fromConsumer" javaType="Consumer">
             <id column="fromConsumer_id" property="id" />
@@ -46,5 +46,17 @@
         WHERE consumer_id = #{id}
     </delete>
 
+    <!--未看的消息个数-->
+    <select id="countWithoutWatch" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(*) FROM privatemessage
+        WHERE consumer_id = #{id}
+        AND watch = FALSE
+    </select>
 
+    <!--将消息设置为已读-->
+    <update id="makeAlreadySee" parameterType="Integer">
+        UPDATE privatemessage
+        SET watch = TRUE
+        WHERE consumer_id = #{id}
+    </update>
 </mapper>

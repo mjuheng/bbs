@@ -6,7 +6,7 @@ import java.util.Date;
 public class PrivateMessage {
     private Integer id;
     private String content;
-    private boolean read;
+    private boolean watch;
     private Date sendTime;
     private Integer fromConsumer_id;
     private Integer consumer_id;
@@ -32,12 +32,12 @@ public class PrivateMessage {
         this.content = content;
     }
 
-    public boolean isRead() {
-        return read;
+    public boolean isWatch() {
+        return watch;
     }
 
-    public void setRead(boolean read) {
-        this.read = read;
+    public void setWatch(boolean watch) {
+        this.watch = watch;
     }
 
     public Integer getFromConsumer_id() {

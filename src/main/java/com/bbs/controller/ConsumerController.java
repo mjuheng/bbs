@@ -4,6 +4,7 @@ import com.bbs.entity.Attention;
 import com.bbs.entity.Consumer;
 import com.bbs.service.IAttentionService;
 import com.bbs.service.IConsumerService;
+import com.bbs.service.IPrivateMessageService;
 import com.bbs.util.ReturnInfo;
 import com.google.code.kaptcha.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ public class ConsumerController {
     private Producer captchaProducer;
     @Autowired
     private IAttentionService attentionService;
+    @Autowired
+    private IPrivateMessageService privateMessageService;
 
     /**
      * 注册操作
@@ -47,7 +50,7 @@ public class ConsumerController {
         /*判断两次密码是否一致*/
         if (!consumerService.isEqualsPassword(consumer.getPassword(), password_confirm)){
             request.setAttribute("errorPassword","两次密码不一致");
-            return "forward:/opt/createAccount.do";
+            return "/createAccount.do";
         }
         String imageName = "";       //图片的保存地址
         if(!image.isEmpty() && image.getSize() > 0){
@@ -77,7 +80,7 @@ public class ConsumerController {
         } catch (DuplicateKeyException e){
             return "forward:/opt/createAccount.do";
         }
-        return "redirect:/opt/login.do";
+        return "/login";
     }
 
     /**
@@ -148,6 +151,7 @@ public class ConsumerController {
         if (verifyRight != null && verifyRight.equals(verify)){
             //验证码正确则进行账号判断
             returnInfo = consumerService.login(consumer);
+            //存入session
             session.setAttribute("consumer",returnInfo.getObj());
         }else {
             returnInfo.setCode(-1);
@@ -155,10 +159,13 @@ public class ConsumerController {
         }
         //判断结果进行跳转
         if (returnInfo.getCode() == 0){
+            //查看为查看的帖子数
+            int count = privateMessageService.countWithoutWatch(((Consumer)returnInfo.getObj()).getId());
+            session.setAttribute("countWithoutWatch",count);
             return "redirect:/index.jsp";
         }else {
             request.setAttribute("loginError",returnInfo);
-            return "forward:/opt/login.do";
+            return "/login";
         }
     }
 

@@ -37,6 +37,8 @@ public class PrivateMessageController {
         }
         List<PrivateMessage> messages = privateMessageService.findMessage(consumer_id);
         request.setAttribute("messages",messages);
+        //显示未读的消息数
+        session.setAttribute("countWithoutWatch",0);
         return "/message";
     }
 
